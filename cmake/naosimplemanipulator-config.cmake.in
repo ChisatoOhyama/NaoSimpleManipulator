@@ -1,0 +1,54 @@
+# NaoSimpleManipulator CMake config file
+#
+# This file sets the following variables:
+# NaoSimpleManipulator_FOUND - Always TRUE.
+# NaoSimpleManipulator_INCLUDE_DIRS - Directories containing the NaoSimpleManipulator include files.
+# NaoSimpleManipulator_IDL_DIRS - Directories containing the NaoSimpleManipulator IDL files.
+# NaoSimpleManipulator_LIBRARIES - Libraries needed to use NaoSimpleManipulator.
+# NaoSimpleManipulator_DEFINITIONS - Compiler flags for NaoSimpleManipulator.
+# NaoSimpleManipulator_VERSION - The version of NaoSimpleManipulator found.
+# NaoSimpleManipulator_VERSION_MAJOR - The major version of NaoSimpleManipulator found.
+# NaoSimpleManipulator_VERSION_MINOR - The minor version of NaoSimpleManipulator found.
+# NaoSimpleManipulator_VERSION_REVISION - The revision version of NaoSimpleManipulator found.
+# NaoSimpleManipulator_VERSION_CANDIDATE - The candidate version of NaoSimpleManipulator found.
+
+message(STATUS "Found NaoSimpleManipulator-@PROJECT_VERSION@")
+set(NaoSimpleManipulator_FOUND TRUE)
+
+find_package(<dependency> REQUIRED)
+
+#set(NaoSimpleManipulator_INCLUDE_DIRS
+#    "@CMAKE_INSTALL_PREFIX@/include/@PROJECT_NAME_LOWER@-@PROJECT_VERSION_MAJOR@"
+#    ${<dependency>_INCLUDE_DIRS}
+#    )
+#
+#set(NaoSimpleManipulator_IDL_DIRS
+#    "@CMAKE_INSTALL_PREFIX@/include/@PROJECT_NAME_LOWER@-@PROJECT_VERSION_MAJOR@/idl")
+set(NaoSimpleManipulator_INCLUDE_DIRS
+    "@CMAKE_INSTALL_PREFIX@/include/@CPACK_PACKAGE_FILE_NAME@"
+    ${<dependency>_INCLUDE_DIRS}
+    )
+set(NaoSimpleManipulator_IDL_DIRS
+    "@CMAKE_INSTALL_PREFIX@/include/@CPACK_PACKAGE_FILE_NAME@/idl")
+
+
+if(WIN32)
+    set(NaoSimpleManipulator_LIBRARIES
+        "@CMAKE_INSTALL_PREFIX@/@LIB_INSTALL_DIR@/@CMAKE_SHARED_LIBRARY_PREFIX@@PROJECT_NAME_LOWER@@CMAKE_STATIC_LIBRARY_SUFFIX@"
+        ${<dependency>_LIBRARIES}
+        )
+else(WIN32)
+    set(NaoSimpleManipulator_LIBRARIES
+        "@CMAKE_INSTALL_PREFIX@/@LIB_INSTALL_DIR@/@CMAKE_SHARED_LIBRARY_PREFIX@@PROJECT_NAME_LOWER@@CMAKE_SHARED_LIBRARY_SUFFIX@"
+        ${<dependency>_LIBRARIES}
+        )
+endif(WIN32)
+
+set(NaoSimpleManipulator_DEFINITIONS ${<dependency>_DEFINITIONS})
+
+set(NaoSimpleManipulator_VERSION @PROJECT_VERSION@)
+set(NaoSimpleManipulator_VERSION_MAJOR @PROJECT_VERSION_MAJOR@)
+set(NaoSimpleManipulator_VERSION_MINOR @PROJECT_VERSION_MINOR@)
+set(NaoSimpleManipulator_VERSION_REVISION @PROJECT_VERSION_REVISION@)
+set(NaoSimpleManipulator_VERSION_CANDIDATE @PROJECT_VERSION_CANDIDATE@)
+
